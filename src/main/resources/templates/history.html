@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Historial IMC</title></head>
+<body>
+<h2>IMC Actual</h2>
+<div>
+  <p>Fecha: <span th:text="${current.recordedAt}"></span></p>
+  <p>IMC: <span th:text="${#numbers.formatDecimal(current.imc, 1, 2)}"></span></p>
+  <p>Peso: <span th:text="${current.weightKg}"></span> kg</p>
+</div>
+
+<h3>Historial</h3>
+<table border="1">
+  <thead><tr><th>Fecha</th><th>IMC</th><th>Peso (kg)</th></tr></thead>
+  <tbody>
+    <tr th:each="r : ${history}">
+      <td th:text="${r.recordedAt}"></td>
+      <td th:text="${#numbers.formatDecimal(r.imc,1,2)}"></td>
+      <td th:text="${r.weightKg}"></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="/imc">Volver</a> | <a href="/logout">Cerrar sesión</a></p>
+</body>
+</html>

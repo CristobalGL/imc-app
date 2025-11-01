@@ -1,0 +1,9 @@
+package com.example.imc.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.imc.model.User;
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUsername(String username);
+}

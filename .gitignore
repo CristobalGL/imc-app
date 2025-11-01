@@ -1,0 +1,20 @@
+# Maven
+/target/
+
+# IntelliJ / IDEs
+*.iml
+/.idea/
+/.vscode/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Credenciales (no subir application.properties si contiene contraseñas)
+src/main/resources/application.properties
+
+# Logs
+*.log
+
+# OS
+*.class
