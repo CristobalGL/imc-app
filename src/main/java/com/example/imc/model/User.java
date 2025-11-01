@@ -1,37 +1,55 @@
 package com.example.imc.model;
 
-import jakarta.persistence.*;
-import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 
 @Entity
-@Table(name = "users")
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="full_name", length = 100)
-    private String fullName;
-
-    @Column(name="username", length = 50, unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
-    private Integer age;
+    private String password;
 
-    @Column(length = 1)
-    private String sex; // M/F
+    private Integer age;        // Para validar null en UserService
+    private Double height;      // Para validar null y rango
+    private Double weight;      // Opcional, para cálculo de IMC
 
-    @Column(name="height_m", nullable = false)
-    private Double height; // meters
-
-    @Column(name="password", nullable = false)
-    private String password; // NOTE: almacenar en claro sólo para demo (usar hash en producción)
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<ImcRecord> records;
-
-    // Getters / setters
-    // ... constructor vacío
+    // Constructor vacío
     public User() {}
-    // getters and setters omitted for brevity - implement all
+
+    // Constructor con campos
+    public User(String username, String password, Integer age, Double height, Double weight) {
+        this.username = username;
+        this.password = password;
+        this.age = age;
+        this.height = height;
+        this.weight = weight;
+    }
+
+    // Getters y Setters
+    public Long getId() { return id; }
+
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+
+    public Integer getAge() { return age; }
+    public void setAge(Integer age) { this.age = age; }
+
+    public Double getHeight() { return height; }
+    public void setHeight(Double height) { this.height = height; }
+
+    public Double getWeight() { return weight; }
+    public void setWeight(Double weight) { this.weight = weight; }
 }
